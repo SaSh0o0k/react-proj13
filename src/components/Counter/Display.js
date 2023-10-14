@@ -58,7 +58,8 @@ const Display = (props) => {
       <p>Значення лічильника: {props.count}</p>
 
       <div className={styles.buttonsContainer}>
-        <button onClick={props.changeCount}
+        <button
+          onClick={props.changeCount}
           className={styles.buttonClick}>
           {props.mode === 'plus' ? 'Додати' : 'Відняти'}
         </button>
