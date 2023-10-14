@@ -37,6 +37,10 @@
     .buttonClick {
       background-color: #4caf50;
       color: white;
+
+      &[disabled] {
+        background-color: #75b278;
+      }
     }
 
     .buttonStart {
@@ -44,7 +48,7 @@
       color: white;
 
       &[disabled] {
-        background-color: #bdd5eb;
+        background-color: #9bc3ea;
       }
     }
 

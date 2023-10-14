@@ -60,14 +60,13 @@ const Display = (props) => {
       <div className={styles.buttonsContainer}>
         <button
           onClick={props.changeCount}
+          disabled={autoClickActive && !(props.count === 0 && props.mode === 'minus')}
           className={styles.buttonClick}>
           {props.mode === 'plus' ? 'Додати' : 'Відняти'}
         </button>
         <button
           onClick={startAutoClick}
-          disabled={
-            (autoClickActive && !(props.count === 0 && props.mode === 'minus')) ||
-            (!autoClickActive && props.count === 0 && props.mode === 'minus')}
+          disabled={autoClickActive && !(props.count === 0 && props.mode === 'minus')}
           className={styles.buttonStart}>
           Старт
         </button>

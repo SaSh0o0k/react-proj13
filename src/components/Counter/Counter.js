@@ -37,7 +37,7 @@ const Counter = () => {
       <Settings
         step={step}
         mode={mode}
-        hangeStep={changeStep}
+        changeStep={changeStep}
         changeMode={changeMode} />
       <Display
         count={count}
