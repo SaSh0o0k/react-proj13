@@ -34,8 +34,15 @@ const Counter = () => {
   return (
     <div className={styles.counterContainer}>
       <h1>ЛІЧИЛЬНИК</h1>
-      <Settings step={step} mode={mode} changeStep={changeStep} changeMode={changeMode} />
-      <Display count={count} changeCount={changeCount} mode={mode} />
+      <Settings
+        step={step}
+        mode={mode}
+        hangeStep={changeStep}
+        changeMode={changeMode} />
+      <Display
+        count={count}
+        changeCount={changeCount}
+        mode={mode} />
     </div>
   );
 };
