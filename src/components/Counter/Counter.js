@@ -35,8 +35,6 @@ const Counter = () => {
     <div className={styles.counterContainer}>
       <h1>ЛІЧИЛЬНИК</h1>
       <Settings
-        step={step}
-        mode={mode}
         changeStep={changeStep}
         changeMode={changeMode} />
       <Display

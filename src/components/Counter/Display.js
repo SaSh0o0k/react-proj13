@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Display.module.scss';
 
-const Display = (props) => {
+const Display = ({ count, changeCount, mode }) => {
   const [autoClickDuration, setAutoClickDuration] = useState(10);
-  const [mode, setMode] = useState(props.mode);
   const [autoClickActive, setAutoClickActive] = useState(false);
+  const [currentMode, setCurrentMode] = useState(mode);
+  const shouldDisableButton = autoClickActive && !(count === 0 && mode === 'minus');
 
   const startAutoClick = () => {
     setAutoClickActive(true);
@@ -24,7 +25,7 @@ const Display = (props) => {
     if (autoClickActive) {
       timer = setTimeout(() => {
         setAutoClickActive(false);
-      }, autoClickDuration * 1000);
+      }, autoClickDuration * 1010);
     }
     return () => clearTimeout(timer);
   }, [autoClickActive, autoClickDuration]);
@@ -32,47 +33,51 @@ const Display = (props) => {
   useEffect(() => {
     const autoClickInterval = setInterval(() => {
       if (autoClickActive) {
-        props.changeCount();
+        changeCount();
       }
     }, 1000);
     return () => clearInterval(autoClickInterval);
-  }, [autoClickActive, props]);
+  }, [autoClickActive, changeCount]);
 
   useEffect(() => {
     startAutoClick();
   }, []);
 
   useEffect(() => {
-    if (props.mode !== mode) {
-      setMode(props.mode);
+    if (currentMode !== mode) {
+      setCurrentMode(mode);
 
       if (autoClickActive) {
         setAutoClickActive(false);
       }
     }
-  }, [props.mode, mode, autoClickActive]);
+  }, [mode, currentMode, autoClickActive]);
 
   return (
     <div className={styles.displayContainer}>
       <h2>Відображення</h2>
-      <p>Значення лічильника: {props.count}</p>
+      <p>Значення лічильника: {count}</p>
 
       <div className={styles.buttonsContainer}>
         <button
-          onClick={props.changeCount}
-          disabled={autoClickActive && !(props.count === 0 && props.mode === 'minus')}
-          className={styles.buttonClick}>
-          {props.mode === 'plus' ? 'Додати' : 'Відняти'}
+          onClick={changeCount}
+          disabled={shouldDisableButton}
+          className={styles.buttonClick}
+        >
+          {mode === 'plus' ? 'Додати' : 'Відняти'}
         </button>
         <button
           onClick={startAutoClick}
-          disabled={autoClickActive && !(props.count === 0 && props.mode === 'minus')}
-          className={styles.buttonStart}>
+          disabled={shouldDisableButton}
+          className={styles.buttonStart}
+        >
           Старт
         </button>
         <button
           onClick={stopAutoClick}
-          className={styles.buttonStop}>
+          disabled={!shouldDisableButton}
+          className={styles.buttonStop}
+        >
           Стоп
         </button>
       </div>

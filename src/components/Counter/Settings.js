@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Settings.module.scss';
 
-const Settings = (props) => {
+const Settings = ({ changeStep, changeMode }) => {
+  const [step, setStep] = useState(1);
+  const [mode, setMode] = useState('plus');
+
   const handleStepChange = (e) => {
     const newStep = parseInt(e.target.value);
-    props.changeStep(newStep);
+    setStep(newStep);
+    changeStep(newStep);
   };
 
   const handleModeChange = (e) => {
     const newMode = e.target.value;
-    props.changeMode(newMode);
+    setMode(newMode);
+    changeMode(newMode);
   };
 
   return (
@@ -19,14 +24,14 @@ const Settings = (props) => {
         Крок:
         <input
           type="number"
-          value={props.step}
+          value={step}
           onChange={handleStepChange}
           className={styles.input}
         />
       </label>
       <label className={styles.labelMode}>
         Режим:
-        <select value={props.mode} onChange={handleModeChange} className={styles.select}>
+        <select value={mode} onChange={handleModeChange} className={styles.select}>
           <option value="plus">Додавання</option>
           <option value="minus">Віднімання</option>
         </select>

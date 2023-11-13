@@ -34,6 +34,12 @@
       cursor: pointer;
     }
 
+    .buttonClick:disabled,
+    .buttonStart:disabled,
+    .buttonStop:disabled {
+      cursor: default;
+    }
+
     .buttonClick {
       background-color: #4caf50;
       color: white;
@@ -55,6 +61,10 @@
     .buttonStop {
       background-color: #f44336;
       color: white;
+
+      &[disabled] {
+        background-color: #eaaeaa;
+      }
     }
   }
 
